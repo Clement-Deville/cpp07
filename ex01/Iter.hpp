@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WHATEVER_HPP
-# define WHATEVER_HPP
+#ifndef ITER_HPP
+# define ITER_HPP
 
 # include <string>
 # include <iostream>
@@ -19,26 +19,11 @@
 # include <limits>
 # include <iomanip>
 
-template<typename T>
-void	swap(T &A, T &B)
+template<typename T, typename F>
+void iter(const T &array, size_t lenght, void (f)(F param))
 {
-	T	tmp;
-
-	tmp = A;
-	A = B;
-	B = tmp;
+	for (size_t i = 0; i < lenght; i++)
+		f((F)array[i]);
 }
 
-template<typename T>
-const T	&min(const T &A, const T &B)
-{
-	return (A < B ? A : B);
-}
-
-template<typename T>
-const T	&max(const T &A, const T &B)
-{
-	return (A > B ? A : B);
-}
-
-#endif /* !WHATEVER_HPP */
+#endif /* !ITER_HPP */

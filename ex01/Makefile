@@ -6,11 +6,11 @@
 #    By: cdeville <cdeville@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/12 16:23:30 by peanut            #+#    #+#              #
-#    Updated: 2024/11/30 11:20:07 by cdeville         ###   ########.fr        #
+#    Updated: 2024/11/30 12:41:39 by cdeville         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME=whatever
+NAME=arrays
 
 CC=c++
 
