@@ -6,17 +6,12 @@
 /*   By: cdeville <cdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:23:43 by cdeville          #+#    #+#             */
-/*   Updated: 2024/11/30 13:35:39 by cdeville         ###   ########.fr       */
+/*   Updated: 2024/12/02 17:56:29 by cdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Iter.hpp"
-
-template<typename T>
-void	set_zero(T &param)
-{
-	param = 0;
-}
+#include "Array.hpp"
 
 template<typename T>
 void	print(T &param)
@@ -26,43 +21,89 @@ void	print(T &param)
 
 int main( void )
 {
-	int	tab_int[8] = {1, 2, 3 ,4 ,5 ,6 ,7, 8};
+	{
+	std::cout <<
+	"/**========================================================================\n" <<
+	"*               TESTING ARRAY OF INT OF SIZE 8\n" <<
+	"*========================================================================**/\n"
+		<< std::endl;
+	Array<int> int_array(8);
+
+	for (unsigned int i = 0; i < int_array.size(); i++)
+		int_array[i] = i;
+
+
+	::iter(int_array.get_array(), int_array.size(), print<const int>);
+
+	std::cout << "Size of the array is: " << int_array.size() << std::endl;
+
 
 	std::cout <<
 	"/**========================================================================\n" <<
-	"*               TESTING PRINT NON CONST WITH CONST FUNCTION PARAM\n" <<
+	"*               TESTING COPY CONSTRUCTOR\n" <<
 	"*========================================================================**/\n"
 		<< std::endl;
-	::iter(tab_int, 8, print<const int>);
+	Array<int> int_array_copy(int_array);
+
+	for (unsigned int i = 0; i < int_array_copy.size(); i++)
+		int_array_copy[i] = i;
+
+	::iter(int_array_copy.get_array(), int_array_copy.size(), print<const int>);
+
+	std::cout << "Size of the array is: " << int_array_copy.size() << std::endl;
 
 	std::cout <<
-	"\n/**========================================================================\n" <<
-	"*               TESTING (SET_ZERO FUNCTION) BOTH INT PARAM\n" <<
+	"/**========================================================================\n" <<
+	"*               MODIFYING COPY \n" <<
 	"*========================================================================**/\n"
 		<< std::endl;
-	std::cout << "Before iter:" << std::endl;
-	for (int i = 0; i < 8; i++)
-		std::cout << "Index: " << i << " Value: "
-			<< tab_int[i] << std::endl;
-	::iter(tab_int, 8, set_zero<int>);
-	std::cout << "\nAfter iter:" << std::endl;
-	for (int i = 0; i < 8; i++)
-		std::cout << "Index: " << i << " Value: "
-			<< tab_int[i] << std::endl;
+
+	for (unsigned int i = 0; i < int_array_copy.size(); i++)
+		int_array_copy[i] = -i;
+
+	std::cout << "Copy: " << std::endl;
+
+	::iter(int_array_copy.get_array(), int_array_copy.size(), print<const int>);
+
+	std::cout << "Original: " << std::endl;
+
+	::iter(int_array.get_array(), int_array.size(), print<const int>);
 
 	std::cout <<
-	"\n/**========================================================================\n" <<
-	"*               TESTING PRINT WITH BOTH CONST STRING PARAM\n" <<
+	"/**========================================================================\n" <<
+	"*                      TESTING BAD INDEX ACCESS\n" <<
 	"*========================================================================**/\n"
 		<< std::endl;
 
-	const std::string string_tab[8] = {"Hello",
-							"Bonjour",
-							"Hola",
-							"Konichiwa",
-							"Ciao",
-							"Ni hao",
-							"Zdras-tvuy-te",};
-	::iter(string_tab, 8, print<const std::string>);
+	try
+	{
+		int_array[10] = 1;
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	}
+
+	{
+		std::cout <<
+		"/**========================================================================\n" <<
+		"*                      TESTING CONST TYPE ALLOC\n" <<
+		"*========================================================================**/\n"
+			<< std::endl;
+
+		Array<const std::string> const_array(8);
+	}
+	{
+		std::cout <<
+		"/**========================================================================\n" <<
+		"*                      TESTING EMPTY ARRAY\n" <<
+		"*========================================================================**/\n"
+			<< std::endl;
+
+		Array<const std::string> empty;
+
+		std::cout << "Empty array size: " << empty.size() << std::endl;
+	}
 	return (0);
 }

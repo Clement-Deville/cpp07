@@ -1,0 +1,14 @@
+{
+	"files.associations": {
+		"*.tcc": "cpp",
+		"compare": "cpp",
+		"type_traits": "cpp",
+		"array": "cpp",
+		"string_view": "cpp",
+		"initializer_list": "cpp",
+		"ranges": "cpp",
+		"span": "cpp",
+		"utility": "cpp",
+		"ostream": "cpp"
+	}
+}
