@@ -19,8 +19,8 @@
 # include <limits>
 # include <iomanip>
 
-template<typename T, typename F>
-void iter(const T &array, size_t lenght, void (f)(F param))
+template<typename T, typename F> // pourquoi const T &array permet quand meme d'etre modifie ??
+void iter(const T &array, size_t lenght, void (f)(F param)) // oblige de retourner un void ??
 {
 	for (size_t i = 0; i < lenght; i++)
 		f((F)array[i]);
