@@ -32,13 +32,13 @@ void	swap(T &A, T &B)
 }
 
 template<typename T>
-const T	&min(const T &A, const T &B)
+T	&min(T &A, T &B)
 {
 	return (A < B ? A : B);
 }
 
 template<typename T>
-const T	&max(const T &A, const T &B)
+T	&max(T &A, T &B)
 {
 	return (A > B ? A : B);
 }
