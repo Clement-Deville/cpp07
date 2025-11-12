@@ -24,6 +24,8 @@ void	swap(T &A, T &B)
 {
 	T	tmp;
 
+	if (&A == &B)
+		return;
 	tmp = A;
 	A = B;
 	B = tmp;
